@@ -1,4 +1,4 @@
 ﻿## 项目说明
-algorithmDiagram.py: 记录算法图解中的内容
+algorithmDiagram.py: 算法图解 
 
-PythonAlgorithmTutorial.py: Python算法教程
+pythonAlgorithmTutorial.py: Python算法教程
