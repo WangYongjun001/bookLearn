@@ -55,14 +55,19 @@ def selection_sort(arr):
 # 递归和快速排序
 # 分治法（divide and conquer， D&C）是一种解决问题的思路（递归）
 # 欧几里得算法（辗转相除法）与更相减损法比较：都可求最大公约数
+
 def sum_1(arr):
-    """求和"""
-    if len(arr) == 0:
+    """求列表各元素和"""
+    if arr == []:
         return 0
-    elif len(arr) == 1:
-        return arr[0]
-    else:
-        return arr[0] + sum_1(arr[1:])
+    return arr[0] + sum_1(arr[1:])
+
+
+def counts_2(arr):
+    """求列表长度"""
+    if arr == []:
+        return 0
+    return 1 + counts_2(arr[1:])
 
 
 def euclidean_algorithm(num1, num2):
@@ -139,6 +144,7 @@ if __name__ == "__main__":
     print(selection_sort(disordered_list))
     # 递归相加
     print(sum_1([1, 2, 3, 4]))
+    print(counts_2([1, 2, 3, 4]))
     print(euclidean_algorithm(1350, 1440))
     print(euclidean_algorithm_1(1350, 1440))
     print(subtraction_loss_algorithm(1350, 1440))
