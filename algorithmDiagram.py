@@ -52,6 +52,84 @@ def selection_sort(arr):
     return new_arr
 
 
+# 递归和快速排序
+# 分治法（divide and conquer， D&C）是一种解决问题的思路（递归）
+# 欧几里得算法（辗转相除法）与更相减损法比较：都可求最大公约数
+def sum_1(arr):
+    """求和"""
+    if len(arr) == 0:
+        return 0
+    elif len(arr) == 1:
+        return arr[0]
+    else:
+        return arr[0] + sum_1(arr[1:])
+
+
+def euclidean_algorithm(num1, num2):
+    """欧几里得算法 求最大公约数"""
+    if num2 > num1:
+        num1, num2 = num2, num1
+    remainder = num1 % num2
+    if remainder == 0:
+        return num2
+    else:
+        return euclidean_algorithm(num2, remainder)
+
+
+def euclidean_algorithm_1(num1, num2):
+    """欧几里得算法 求最大公约数"""
+    if num2 > num1:
+        num1, num2 = num2, num1
+    while (num1 % num2 != 0):
+        num1, num2 = num2, num1 % num2
+    return num2
+
+
+def subtraction_loss_algorithm(num1, num2):
+    """更相减损法 求最大公约数"""
+    if num2 > num1:
+        num1, num2 = num2, num1
+    reminder = num1 - num2
+    if reminder == num2:
+        return num2
+    else:
+        return subtraction_loss_algorithm(num2, reminder)
+
+
+def subtraction_loss_algorithm_1(num1, num2):
+    """更相减损法 求最大公约数"""
+    while (num1 != num2):
+        if num1 > num2:
+            num1 -= num2
+        else:
+            num2 -= num1
+    return num1, num2
+
+
+def stein_algotithm(num1, num2):
+    """
+    Stein算法 求最大公约数
+    Stein算法很好的解决了辗转相除法中的这个缺陷，Stein算法只有整数的移位和加减法。下面就来说一下Stein算法的原理：
+    若a和b都是偶数，则记录下公约数2，然后都除2（即右移1位）；
+    若其中一个数是偶数，则偶数除2，因为此时2不可能是这两个数的公约数了
+    若两个都是奇数，则a = |a-b|，b = min(a,b)，因为若d是a和b的公约数，那么d也是|a-b|和min(a,b)的公约数。
+    Stein算法比辗转相除法更加快速，简易。它与每一次进行更相减损法得到的结果似乎存在着微妙的联系，通过下面的比较，可以发现两种算法之间的联系。 [2]
+    更相减损法：操作	甲数	乙数	Stein算法：操作	甲数	乙数
+                    98	    63		                98   	 63
+                    98-63=35	63	35	98是偶数，除以2	49	63
+                    63-35=28	35	28	都是奇数，63-49=14	49	14
+                    35-28=7	28	7	14是偶数，除以2	49	7
+                    28-7=21	7	21	49-7=42	42	7
+                    21-7=14	7	14	42是偶数，除以2	21	7
+                    14-7=7	7	7	21-7=14	14
+                    7
+                    7-7=0	7	0	14是偶数，除以2	7	7
+                    7-7=0	7	0
+
+    """
+    pass
+
+
 if __name__ == "__main__":
     # 二分查找
     ordered_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "p"]
@@ -59,3 +137,9 @@ if __name__ == "__main__":
     # 选择排序
     disordered_list = ["f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "a", "b", "c", "d", "e", "p"]
     print(selection_sort(disordered_list))
+    # 递归相加
+    print(sum_1([1, 2, 3, 4]))
+    print(euclidean_algorithm(1350, 1440))
+    print(euclidean_algorithm_1(1350, 1440))
+    print(subtraction_loss_algorithm(1350, 1440))
+    print(subtraction_loss_algorithm_1(1350, 1440))
