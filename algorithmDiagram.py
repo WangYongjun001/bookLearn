@@ -145,7 +145,52 @@ def quick_sort(arr):
         greater = [i for i in arr[1:] if i > pivot]
         return quick_sort(less) + [pivot] + quick_sort(greater)  # 递归条件
 
+
 # 散列表，python的字典就是散列表
+
+# 广度优先搜索，图算法，队列(queue)和栈(stack)（堆栈）
+"""
+    栈：   是一直只能访问其一端实现数据存储和检索的线性数据结构，规则是一种后进先出的形式。
+    队列： 队列是一种具有先进先出特征的线性数据结构，元素的增加只能在一端进行，元素的减少只能在另一端进行，
+           元素增加的一端叫做队尾，而元素减少的一端叫做队首，Python中的from collections import deque可以实现，popleft().
+    堆：   是程序在运行是，而不是在编译时，申请一定大小的内存空间，即是动态分配内存，
+           对其访问和一般访问没有区别（堆本质是在运行时请求操作系统动态分配给自己的内存）
+"""
+# 图
+graph = {}
+graph["you"] = ["alice", "bob", "claire"]
+graph["bob"] = ["anuj", "peggy"]
+graph["alice"] = ["peggy"]
+graph["claire"] = ["thom", "jonny"]
+graph["anuj"] = []
+graph["peggy"] = []
+graph["thom"] = []
+graph["jonny"] = []
+
+
+def person_is_seller(person):
+    if person[-1] == "m":
+        return True
+
+
+def breadth_first_search(graph, first_name):
+    """广度优先搜索，使用队列"""
+    from collections import deque
+    search_queue = deque()
+    search_queue += graph[first_name]
+    searched = []
+    while search_queue:
+        person = search_queue.popleft()
+        if person not in searched:
+            if person_is_seller(person):
+                print(person + " is a mango seller")
+                return True
+            else:
+                search_queue += graph[person]
+                searched.append(person)
+    print("没有芒果商人")
+    return False
+
 
 if __name__ == "__main__":
     # 二分查找
@@ -163,3 +208,4 @@ if __name__ == "__main__":
     print(subtraction_loss_algorithm_1(1350, 1440))
     disordered_list = ["f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "a", "b", "c", "d", "e", "p"]
     print(quick_sort(disordered_list))
+    print(breadth_first_search(graph, "you"))
