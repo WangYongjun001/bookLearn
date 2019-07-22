@@ -191,6 +191,10 @@ def breadth_first_search(graph, first_name):
     print("没有芒果商人")
     return False
 
+# 狄克斯特拉算法
+
+
+# 贝尔曼-福德算法 （Bellman-Ford algorithm）
 
 if __name__ == "__main__":
     # 二分查找
