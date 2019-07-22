@@ -135,6 +135,18 @@ def stein_algotithm(num1, num2):
     pass
 
 
+# 快速排序
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr  # 基线条件
+    else:
+        pivot = arr[0]
+        less = [i for i in arr[1:] if i <= pivot]
+        greater = [i for i in arr[1:] if i > pivot]
+        return quick_sort(less) + [pivot] + quick_sort(greater)  # 递归条件
+
+# 散列表，python的字典就是散列表
+
 if __name__ == "__main__":
     # 二分查找
     ordered_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "p"]
@@ -149,3 +161,5 @@ if __name__ == "__main__":
     print(euclidean_algorithm_1(1350, 1440))
     print(subtraction_loss_algorithm(1350, 1440))
     print(subtraction_loss_algorithm_1(1350, 1440))
+    disordered_list = ["f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "a", "b", "c", "d", "e", "p"]
+    print(quick_sort(disordered_list))
