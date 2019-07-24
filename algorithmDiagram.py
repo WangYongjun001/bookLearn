@@ -192,6 +192,17 @@ def breadth_first_search(graph, first_name):
     return False
 
 # 狄克斯特拉算法
+# 需要用到散列表作图
+
+graph = {}
+graph["you"] = ["alice", "bob", "claire"]
+graph["bob"] = ["anuj", "peggy"]
+graph["alice"] = ["peggy"]
+graph["claire"] = ["thom", "jonny"]
+graph["anuj"] = []
+graph["peggy"] = []
+graph["thom"] = []
+graph["jonny"] = []
 
 
 # 贝尔曼-福德算法 （Bellman-Ford algorithm）
