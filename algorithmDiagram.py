@@ -111,7 +111,7 @@ def subtraction_loss_algorithm_1(num1, num2):
     return num1, num2
 
 
-def stein_algotithm(num1, num2):
+def stein_algorithm(num1, num2):
     """
     Stein算法 求最大公约数
     Stein算法很好的解决了辗转相除法中的这个缺陷，Stein算法只有整数的移位和加减法。下面就来说一下Stein算法的原理：
@@ -148,33 +148,33 @@ def quick_sort(arr):
 
 # 散列表，python的字典就是散列表
 
-# 广度优先搜索，图算法，队列(queue)和栈(stack)（堆栈）
 """
-    栈：   是一直只能访问其一端实现数据存储和检索的线性数据结构，规则是一种后进先出的形式。
-    队列： 队列是一种具有先进先出特征的线性数据结构，元素的增加只能在一端进行，元素的减少只能在另一端进行，
-           元素增加的一端叫做队尾，而元素减少的一端叫做队首，Python中的from collections import deque可以实现，popleft().
-    堆：   是程序在运行是，而不是在编译时，申请一定大小的内存空间，即是动态分配内存，
-           对其访问和一般访问没有区别（堆本质是在运行时请求操作系统动态分配给自己的内存）
+        广度优先搜索，图算法，队列(queue)和栈(stack)（堆栈）
+栈：   是一直只能访问其一端实现数据存储和检索的线性数据结构，规则是一种后进先出的形式。
+队列： 队列是一种具有先进先出特征的线性数据结构，元素的增加只能在一端进行，元素的减少只能在另一端进行，
+       元素增加的一端叫做队尾，而元素减少的一端叫做队首，Python中的from collections import deque可以实现，popleft().
+堆：   是程序在运行是，而不是在编译时，申请一定大小的内存空间，即是动态分配内存，
+       对其访问和一般访问没有区别（堆本质是在运行时请求操作系统动态分配给自己的内存）
 """
-# 图
-graph = {}
-graph["you"] = ["alice", "bob", "claire"]
-graph["bob"] = ["anuj", "peggy"]
-graph["alice"] = ["peggy"]
-graph["claire"] = ["thom", "jonny"]
-graph["anuj"] = []
-graph["peggy"] = []
-graph["thom"] = []
-graph["jonny"] = []
 
 
 def person_is_seller(person):
-    if person[-1] == "m":
+    if person[-1] == "3":
         return True
 
 
-def breadth_first_search(graph, first_name):
+def breadth_first_search(first_name="you", graph=None):
     """广度优先搜索，使用队列"""
+    if not graph:
+        graph = {
+            'you': ['alice', 'bob', 'claire'],
+            'bob': ['anuj', 'peggy'],
+            'alice': ['peggy'],
+            'claire': ['thom', 'jonny'],
+            'anuj': [],
+            'peggy': [],
+            'thom': [],
+            'jonny': []}
     from collections import deque
     search_queue = deque()
     search_queue += graph[first_name]
@@ -191,8 +191,31 @@ def breadth_first_search(graph, first_name):
     print("没有芒果商人")
     return False
 
-# 狄克斯特拉算法
-# 需要用到散列表作图
+
+"""
+        狄克斯特拉算法
+1、从首节点开始，计算到各邻节点的权重，找到权重最低的节点（此时邻节点的父节点均为首届点）
+2、选择权重最低的节点开始计算其到各邻节点的权重（首节点到该邻节点的总权重），添加其邻居父节点为该节点
+3、依次选择权重第二低、第三低......的节点，计算各自到邻节点的权重。
+   如果有邻节点相同，且计算到该邻节点的权重更低，则更新其权重为当前权重，父节点为当前节点。
+4、重复以上2和3，直到首尾之间的都计算过邻节点的开销；（各节点只计算一次到邻节点的开销，且有顺序，因此权重不能为负）
+5、最终计算出到尾节点最低的权重，并根据父节点逆向查找父节点，得到节点路径
+
+        Dijkstra's Algorithm 基本思想：
+若给定带权有向图G=(V,E)和源顶点v0，构筑一个源集合S，将v0加入其中。
+① 对差集V\S中 个顶点vi，逐一计算从v0 至它的距离 D(v0 , vi ),若该两顶点之间没有边，则其距离为无穷大。
+   求出其中距离最短的顶点w，将其加入到集合 S 中。
+② 重新计算 v0 至差集 V\S 中各顶点的距离 D（v0, vi ）= Min(D(v0, vi ), D(v0, w ) + C(w, vi )).
+   其中C（w, vi ）是顶点w 与 vi 之间边上的费用。
+③ 重复 步骤①②。直至所有的顶点都加到集合S 中为止。
+
+        在包含负权边的图中，要找出最短路径，可使用另一种算法——贝尔曼-福德算法（Bellman-Ford algorithm） 
+"""
+
+
+def dijkstra_algorithm():
+    pass
+
 
 graph = {}
 graph["you"] = ["alice", "bob", "claire"]
@@ -203,7 +226,6 @@ graph["anuj"] = []
 graph["peggy"] = []
 graph["thom"] = []
 graph["jonny"] = []
-
 
 # 贝尔曼-福德算法 （Bellman-Ford algorithm）
 
@@ -223,4 +245,4 @@ if __name__ == "__main__":
     print(subtraction_loss_algorithm_1(1350, 1440))
     disordered_list = ["f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "a", "b", "c", "d", "e", "p"]
     print(quick_sort(disordered_list))
-    print(breadth_first_search(graph, "you"))
+    print(breadth_first_search())
