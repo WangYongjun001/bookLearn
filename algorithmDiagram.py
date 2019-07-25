@@ -58,14 +58,14 @@ def selection_sort(arr):
 
 def sum_1(arr):
     """求列表各元素和"""
-    if arr == []:
+    if not arr:
         return 0
     return arr[0] + sum_1(arr[1:])
 
 
 def counts_2(arr):
     """求列表长度"""
-    if arr == []:
+    if not arr:
         return 0
     return 1 + counts_2(arr[1:])
 
@@ -82,12 +82,17 @@ def euclidean_algorithm(num1, num2):
 
 
 def euclidean_algorithm_1(num1, num2):
-    """欧几里得算法 求最大公约数"""
+    """欧几里得算法 求最大公约数    消除多余运算"""
     if num2 > num1:
         num1, num2 = num2, num1
-    while (num1 % num2 != 0):
-        num1, num2 = num2, num1 % num2
+    remainder = num1 % num2
+    while remainder:
+        num1, num2 = num2, remainder
+        remainder = num1 % num2
     return num2
+    # while (num1 % num2 != 0):
+    #     num1, num2 = num2, num1 % num2
+    # return num2
 
 
 def subtraction_loss_algorithm(num1, num2):
@@ -102,13 +107,20 @@ def subtraction_loss_algorithm(num1, num2):
 
 
 def subtraction_loss_algorithm_1(num1, num2):
-    """更相减损法 求最大公约数"""
-    while (num1 != num2):
+    """更相减损法 求最大公约数   消除多余运算 """
+    while True:
         if num1 > num2:
             num1 -= num2
-        else:
+        elif num1 < num2:
             num2 -= num1
-    return num1, num2
+        else:
+            return num1, num2
+    # while (num1 != num2):
+    #     if num1 > num2:
+    #         num1 -= num2
+    #     else:
+    #         num2 -= num1
+    # return num1, num2
 
 
 def stein_algorithm(num1, num2):
@@ -214,6 +226,14 @@ def breadth_first_search(first_name="you", graph=None):
 
 
 def dijkstra_algorithm():
+    graph = {
+        "start": {"a": 6, "b": 2, },
+        "a": {"fin": 1},
+        "b": {"a": 3, "b": 5},
+        "fin": {}
+    }
+    costs = {}
+    parents = {}
     pass
 
 
