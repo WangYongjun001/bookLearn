@@ -224,45 +224,66 @@ def breadth_first_search(first_name="you", graph=None):
         在包含负权边的图中，要找出最短路径，可使用另一种算法——贝尔曼-福德算法（Bellman-Ford algorithm） 
 """
 
+graph = {
+    "start": {"a": 6, "b": 2, },
+    "a": {"fin": 1},
+    "b": {"a": 3, "b": 5},
+    "fin": {}
+}
+# 1 第一步
+start_node = "start"
+costs = {}
+parents = {}
+for node in graph.keys():
+    if node != start_node:
+        costs[node] = graph[start_node].get(node) or float("inf")
+        parents[node] = 0  # TODO
+print(costs)
+parents = {"a": "start", "b": "start", "fin": None}
+processed = []
+
 
 def dijkstra_algorithm():
-    graph = {
-        "start": {"a": 6, "b": 2, },
-        "a": {"fin": 1},
-        "b": {"a": 3, "b": 5},
-        "fin": {}
-    }
-    costs = {}
-    parents = {}
-    pass
+    """狄克斯特拉算法实现"""
+    node = find_lowest_cost_node(costs)
+    while node is not None:
+        cost = costs[node]
+        neighbors = graph[node]
+        for n in neighbors.keys():
+            new_cost = cost + neighbors[n]
+            if costs[n] > new_cost:
+                costs[n] = new_cost
+                parents[n] = node
+        processed.append(node)
+        node = find_lowest_cost_node(costs)
 
 
-graph = {}
-graph["you"] = ["alice", "bob", "claire"]
-graph["bob"] = ["anuj", "peggy"]
-graph["alice"] = ["peggy"]
-graph["claire"] = ["thom", "jonny"]
-graph["anuj"] = []
-graph["peggy"] = []
-graph["thom"] = []
-graph["jonny"] = []
+def find_lowest_cost_node(costs):
+    lowest_cost = float("inf")  # 正无穷大
+    lowest_cost_node = None
+    for node in costs:
+        cost = costs[node]
+        if cost < lowest_cost and node not in processed:
+            lowest_cost = cost
+            lowest_cost_node = node
+    return lowest_cost_node
 
-# 贝尔曼-福德算法 （Bellman-Ford algorithm）
 
 if __name__ == "__main__":
-    # 二分查找
-    ordered_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "p"]
-    binary_search(ordered_list, "p")
-    # 选择排序
-    disordered_list = ["f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "a", "b", "c", "d", "e", "p"]
-    print(selection_sort(disordered_list))
-    # 递归相加
-    print(sum_1([1, 2, 3, 4]))
-    print(counts_2([1, 2, 3, 4]))
-    print(euclidean_algorithm(1350, 1440))
-    print(euclidean_algorithm_1(1350, 1440))
-    print(subtraction_loss_algorithm(1350, 1440))
-    print(subtraction_loss_algorithm_1(1350, 1440))
-    disordered_list = ["f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "a", "b", "c", "d", "e", "p"]
-    print(quick_sort(disordered_list))
-    print(breadth_first_search())
+    # # 二分查找
+    # ordered_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "p"]
+    # binary_search(ordered_list, "p")
+    # # 选择排序
+    # disordered_list = ["f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "a", "b", "c", "d", "e", "p"]
+    # print(selection_sort(disordered_list))
+    # # 递归相加
+    # print(sum_1([1, 2, 3, 4]))
+    # print(counts_2([1, 2, 3, 4]))
+    # print(euclidean_algorithm(1350, 1440))
+    # print(euclidean_algorithm_1(1350, 1440))
+    # print(subtraction_loss_algorithm(1350, 1440))
+    # print(subtraction_loss_algorithm_1(1350, 1440))
+    # disordered_list = ["f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "a", "b", "c", "d", "e", "p"]
+    # print(quick_sort(disordered_list))
+    # print(breadth_first_search())
+    pass
