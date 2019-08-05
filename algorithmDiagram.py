@@ -269,6 +269,40 @@ def find_lowest_cost_node(costs):
     return lowest_cost_node
 
 
+# 第8章 贪婪算法
+
+# 二项式定理：https://baike.baidu.com/item/%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%AE%9A%E7%90%86/7134359?fr=aladdin
+# 广播电台覆盖问题
+
+
+def greedy_algorithm():
+    """
+    解决广播电台广告投放问题的，这是一种近似算法 （approximation algorithm），O(n**2)，
+    1 选出这样一个广播台， 即它覆盖了最多的未覆盖州
+    2 重复第一步， 直到覆盖了所有的州
+    """
+    states_needed = {"mt", "wa", "or", "id", "nv", "ut", "ca", "az"}
+    stations = {"kone": {"id", "nv", "ut"},
+                "ktwo": {"wa", "id", "mt"},
+                "kthree": {"or", "nv", "ca"},
+                "kfour": {"nv", "ut"},
+                "kfive": {"ca", "az"}}
+
+    final_stations = set()  # 空集合定义方法，不能用 {}
+    while states_needed:
+        best_station = None
+        states_covered = set()
+        for station, states_for_station in stations.items():
+            covered = states_needed & states_for_station  # 交集
+            if len(covered) > len(states_covered):
+                best_station = station
+                states_covered = covered
+                print(best_station)
+        final_stations.add(best_station)
+        states_needed -= states_covered
+    return final_stations  # 集合无序
+
+
 if __name__ == "__main__":
     # # 二分查找
     # ordered_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "p"]
@@ -286,4 +320,5 @@ if __name__ == "__main__":
     # disordered_list = ["f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "a", "b", "c", "d", "e", "p"]
     # print(quick_sort(disordered_list))
     # print(breadth_first_search())
+    print(greedy_algorithm())
     pass
