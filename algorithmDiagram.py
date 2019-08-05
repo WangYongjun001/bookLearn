@@ -303,6 +303,10 @@ def greedy_algorithm():
     return final_stations  # 集合无序
 
 
+# NP完全问题的简单定义是， 以难解著称的问题， 如旅行商问题和集合
+# 覆盖问题。 很多非常聪明的人都认为， 根本不可能编写出可快速解决这
+# 些问题的算法。
+
 if __name__ == "__main__":
     # # 二分查找
     # ordered_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "p"]
